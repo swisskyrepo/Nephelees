@@ -7,6 +7,9 @@
   <a href="https://colab.research.google.com/github/swisskyrepo/Nephelees/blob/main/google_colab_hashcat.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 </p>
 
+
+Most of the credits are due to @mxrch and @ShutdownRepo. This repository is mostly a rework of their scripts, head over to the [References](#references) for more informations.
+
 ## Quick Start
 
 0. Open the `ipynb` file by clicking on the button **Open in Colab**
@@ -21,14 +24,7 @@
 
 :warning: For every 12hrs or so Disk, RAM, VRAM, CPU cache etc data that is on our alloted virtual machine will get **erased**. 
 
-
- git clone https://github.com/iphelix/pack/blob/master/README
-$ python2 statsgen.py ../hashcat.potfile -o hashcat.mask
-$ python2 maskgen.py hashcat.mask --targettime 3600 --optindex -q -o hashcat_1H.hcmask
-
-
-* markov, keyboard walking, dico + rules , haveibeenpwn
-* reuse old pot (extract passwd to new wordlist) 
+:information_source: Markvov chain are enabled in default hashcat version.
 
 
 ## Hashcat Cheatsheet
@@ -59,13 +55,26 @@ Here are some of the most used hash types for the `--hash-type` option
 Hashcat masks for custom cracking
 
 ```powershell
+command: -a 3 ?l?l?l?l?l?l?l?l
+keyspace: aaaaaaaa - zzzzzzzz
 
+command: -a 3 -1 ?l?d ?1?1?1?1?1
+keyspace: aaaaa - 99999
+
+command: -a 3 password?d
+keyspace: password0 - password9
+
+command: -a 3 -1 ?l?u ?1?l?l?l?l?l19?d?d
+keyspace: aaaaaa1900 - Zzzzzz1999
+
+command: -a 3 -1 ?dabcdef -2 ?l?u ?1?1?2?2?2?2?2
+keyspace: 00aaaaa - ffZZZZZ
+
+command: -a 3 -1 efghijklmnop ?1?1?1
+keyspace: eee - ppp
 ```
 
 ## References & Ideas
-
-Most of the credits are due to @mxrch and @ShutdownRepo. 
-This repository is mostly a rework of their scripts.
 
 * https://github.com/mxrch/penglab
 * https://github.com/ShutdownRepo/hashonymize
