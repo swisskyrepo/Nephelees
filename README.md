@@ -7,31 +7,45 @@ Néphélées (Νεφήλαι, Nephḗlai) : cloud nymphs greek - also ntds crack
 
 ## V1 - Google Colab
 
-Roll for Tesla P100
-
 * https://github.com/ShutdownRepo/hashonymize
 * https://github.com/ShutdownRepo/google-colab-hashcat
 * https://github.com/mxrch/penglab
+* https://colab.research.google.com/drive/1arm1_HEMb868mk18FlLkEcqvHPB_Ibgb#scrollTo=lWPQqb3oETLd
 
 ```ps1
 Go on : https://colab.research.google.com/github/mxrch/penglab/blob/master/penglab.ipynb
 Select "Runtime", "Change runtime type", and set "Hardware accelerator" to GPU.
 Change the config by setting "True" at tools you want to install.
 Select "Runtime" and "Run all" !
-
-
-Workflow example 3 (OPSEC: crack anonymized hashes)
-run the preparation script below
-on your local machine, run hashonymize to anonymize your hash lists
-upload your anon hashes list on the colab !wget http://yourip:yourport/yourfile
-run a hashcat command like this to start cracking !hashcat --status --hash-type 1000 --attack-mode 0 --username DOMAIN.LOCAL.ntds wordlists/rockyou.txt
-recover the .pot file from the Google Colab !curl --upload-file ~/.hashcat/hashcat.potfile http://yourip:yourport/
-on your local machine, run the following hashcat command with the recovered potfile to match real usernames with cracked password hashcat --potfile-path hashcat.potfile --hash-type 1000 --username DOMAIN.LOCAL.ntds wordlists/rockyou.txt
-hashcat -m 1000 --potfile-path ntds.cracked ntds.tocrack --show --username
 ```
 
 * markov, keyboard walking, dico + rules , haveibeenpwn
 * reuse old pot (extract passwd to new wordlist) 
+
+Here are some of the most used attack modes for the `--attack-mode` option
+```
+0     Wordlist (with or without rules)
+3     Pure bruteforce
+```
+
+Here are some of the most used hash types for the `--hash-type` option
+```ps1
+1000     NTLM (actually its for NT hashes)
+3000     LM
+5500     Net-NTLMv1 (actually, it should be called NTLMv1)
+5600     Net-NTLMv2 (actually, it should be called NTLMv2)
+13100    Kerberoast
+18200    ASREProast
+22000    WPA-PBKDF2-PMKID+EAPOL
+16800    WPA-PMKID-PBKDF2
+0        md5
+100      sha1
+1400     sha2-256
+1700     sha2-512
+
+# 2 hours
+-a 3 -1 ?l?d?u ?1?1?1?1?1?1?1?1
+```
 
 ## V2 - UI
 
