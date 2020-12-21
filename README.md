@@ -1,26 +1,37 @@
 # Nephelees
-Néphélées (Νεφήλαι, Nephḗlai) : cloud nymphs greek - also ntds cracking tool abusing Google Colab 
+
+> Néphélées (Νεφήλαι, Nephḗlai) : cloud nymphs greek - also a NTDS cracking tool abusing Google Colab 
 
 <p align="center">
+  <img src="https://github.com/swisskyrepo/Nephelees/raw/main/img/logo.jpg?raw=true"><br>
   <a href="https://colab.research.google.com/github/swisskyrepo/Nephelees/blob/main/google_colab_hashcat.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 </p>
 
-## V1 - Google Colab
+## Quick Start
 
-* https://github.com/ShutdownRepo/hashonymize
-* https://github.com/ShutdownRepo/google-colab-hashcat
-* https://github.com/mxrch/penglab
-* https://colab.research.google.com/drive/1arm1_HEMb868mk18FlLkEcqvHPB_Ibgb#scrollTo=lWPQqb3oETLd
+0. Open the `ipynb` file by clicking on the button **Open in Colab**
+1. Select **Runtime**, **Change runtime type**, and set **Hardware accelerator** to **GPU**.    
+2. Select **Runtime**" and **Run all"** !
+3. On your local machine, run [hashonymize](https://github.com/ShutdownRepo/hashonymize) to anonymize your hash lists
+4. Upload your anonymized hashes list on the colab `!wget http://yourip:yourport/yourfile` or with the upload button
+5. Install requirements (hashcat + wordlists + rules)
+6. Run hashcat commands
+7. Recover the .pot file from the Google Colab `!curl --upload-file ~/.hashcat/hashcat.potfile http://yourip:yourport/` or download the file from the explorer in the left side of the panel.
+8. On your local machine, run the following hashcat command with the recovered potfile to match real usernames with cracked password `hashcat --potfile-path hashcat.potfile --hash-type 1000 --username example.ntds wordlists/rockyou.txt`
 
-```ps1
-Go on : https://colab.research.google.com/github/mxrch/penglab/blob/master/penglab.ipynb
-Select "Runtime", "Change runtime type", and set "Hardware accelerator" to GPU.
-Change the config by setting "True" at tools you want to install.
-Select "Runtime" and "Run all" !
-```
+:warning: For every 12hrs or so Disk, RAM, VRAM, CPU cache etc data that is on our alloted virtual machine will get **erased**. 
+
+
+ git clone https://github.com/iphelix/pack/blob/master/README
+$ python2 statsgen.py ../hashcat.potfile -o hashcat.mask
+$ python2 maskgen.py hashcat.mask --targettime 3600 --optindex -q -o hashcat_1H.hcmask
+
 
 * markov, keyboard walking, dico + rules , haveibeenpwn
 * reuse old pot (extract passwd to new wordlist) 
+
+
+## Hashcat Cheatsheet
 
 Here are some of the most used attack modes for the `--attack-mode` option
 ```
@@ -29,6 +40,7 @@ Here are some of the most used attack modes for the `--attack-mode` option
 ```
 
 Here are some of the most used hash types for the `--hash-type` option
+
 ```ps1
 1000     NTLM (actually its for NT hashes)
 3000     LM
@@ -42,18 +54,22 @@ Here are some of the most used hash types for the `--hash-type` option
 100      sha1
 1400     sha2-256
 1700     sha2-512
-
-# 2 hours
--a 3 -1 ?l?d?u ?1?1?1?1?1?1?1?1
 ```
 
-## V2 - UI
+Hashcat masks for custom cracking
 
-* https://github.com/Coalfire-Research/npk
-* https://github.com/s3inlc/hashtopolis/releases/tag/v0.12.0
+```powershell
+
+```
 
 ## References & Ideas
 
+Most of the credits are due to @mxrch and @ShutdownRepo. 
+This repository is mostly a rework of their scripts.
+
+* https://github.com/mxrch/penglab
+* https://github.com/ShutdownRepo/hashonymize
+* https://github.com/ShutdownRepo/google-colab-hashcat
 * https://github.com/carlmon/Hashcat-Azure
 * https://durdle.com/2017/04/23/using-hashcat-to-crack-hashes-on-azure/
 * https://www.trillsecurity.com/tutorials/automating-hashtopolis-with-terraform-part-i/
