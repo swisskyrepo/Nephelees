@@ -24,7 +24,7 @@ Most of the credits are due to @mxrch and @ShutdownRepo. This repository is most
 
 :warning: For every 12hrs or so Disk, RAM, VRAM, CPU cache etc data that is on our alloted virtual machine will get **erased**. 
 
-:information_source: Markvov chain are enabled in default hashcat version.
+:information_source: Markvov chain are enabled in default hashcat version. P100 GPU is an equivalent of GTX1080.
 
 
 ## Hashcat Cheatsheet
